@@ -31,7 +31,7 @@ pub fn test_proto() -> String {
 
 pub fn test_proto_load_all() {
     let mut content = Vec::new();
-    let g = glob::glob("/Users/pgherveou/go/src/github.com/lyft/idl/protos/pb/lyft/**/*.proto");
+    let g = glob::glob("~/idl/**/*.proto");
 
     for path in g.unwrap().filter_map(Result::ok) {
         let mut proto_file = String::new();
@@ -46,9 +46,7 @@ pub fn test_proto_load_all() {
     let content_ref: Vec<_> = content.iter().map(|s| s.as_str()).collect();
 
     let context = Context::parse(&content_ref).unwrap();
-    
     let hello_name = &String::from("pb.lyft.hello.SayHelloRequest");
     let msg = context.get_message(hello_name).unwrap();
-    
     println!("DONE! {}", msg.full_name)
 }
